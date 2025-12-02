@@ -139,13 +139,23 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <keyname>${env.RETRY_ASPECT_KEYID}</keyname>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <passphraseServerId>${env.RETRY_ASPECT_KEYID}</passphraseServerId>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
+                        <version>3.7.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -171,11 +181,11 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.5.0</version>
+                        <version>0.4.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <tokenAuth>true</tokenAuth>
+                            <autoPublish>true</autoPublish>
                         </configuration>
                     </plugin>
                     <plugin>
